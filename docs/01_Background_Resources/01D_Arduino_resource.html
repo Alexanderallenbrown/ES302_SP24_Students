@@ -13191,11 +13191,11 @@ $( document ).ready(function(){
 <p>The top of the code is also where you will tell the compiler if you wish to use <a href="https://www.arduino.cc/en/Reference/Libraries">libraries</a> in your code. Also note that <strong>every line in Arduino should be terminated with a semicolon!</strong> Failure to do this will result in a compiler error.</p>
 <hr/>
 <p>Any code that needs to run only one time will go in the void setup() loop. This includes beginning a serial connection with your computer using:</p>
-<div class="highlight"><pre><span></span><span class="nf">Serial</span><span class="p">.</span><span class="nf">begin</span><span class="p">(</span><span class="mi">115200</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><span class="nf">Serial</span><span class="p">.</span><span class="nf">begin</span><span class="p">(</span><span class="mi">115200</span><span class="p">);</span><span class="w"></span>
 </pre></div>
 <p>or declaring certain arduino digital pins as outputs or inputs:</p>
-<div class="highlight"><pre><span></span><span class="nf">pinMode</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span><span class="kr">OUTPUT</span><span class="p">);</span>
-<span class="nf">pinMode</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="kr">INPUT</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><span class="nf">pinMode</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span><span class="kr">OUTPUT</span><span class="p">);</span><span class="w"></span>
+<span class="nf">pinMode</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="kr">INPUT</span><span class="p">);</span><span class="w"></span>
 </pre></div>
 <hr/>
 <p>The void loop() function is where the "meat" of your code goes. If you were to describe what your program does to someone, you'd be describing what you put in the void loop() function. This is where, over and over, the processor will read inputs from its environment (digital signals and analog voltages), make calculations, and write analog and/or digital values back to its environment.</p>
@@ -13231,44 +13231,44 @@ $( document ).ready(function(){
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Variable-Scope">Variable Scope<a class="anchor-link" href="#Variable-Scope">¶</a></h3><p>If you will need to use a variable over and over, and need its value to be stored between successive executions of void loop(), it needs to be <strong>global</strong> in <a href="https://www.arduino.cc/reference/en/language/variables/variable-scope--qualifiers/scope/">scope</a>. Any variable declared above void setup() and void loop() is global. An example is shown below for a program that increments a variable every time void loop() runs, and prints the value to the serial monitor:</p>
-<div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">myCount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">myCount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
 
-<span class="kt">void</span><span class="w"> </span><span class="nf">setup</span><span class="p">(){</span>
-<span class="w">    </span><span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">115200</span><span class="p">);</span>
-<span class="p">}</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">setup</span><span class="p">(){</span><span class="w"></span>
+<span class="w">    </span><span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">115200</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
-<span class="kt">void</span><span class="w"> </span><span class="nf">loop</span><span class="p">(){</span>
-<span class="w">    </span><span class="n">myCount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">myCount</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
-<span class="w">    </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">myCount</span><span class="p">);</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">loop</span><span class="p">(){</span><span class="w"></span>
+<span class="w">    </span><span class="n">myCount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">myCount</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">myCount</span><span class="p">);</span><span class="w"></span>
 <span class="w">    </span><span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">();</span><span class="c1">//prints a new line for readability</span>
-<span class="p">}</span>
+<span class="p">}</span><span class="w"></span>
 </pre></div>
 <p>Notice that each time loop() runs, it already needs to "know" what the value of myCount is.</p>
 <p>If, on the other hand, you do not need a variable to be "persistent" between executions of void loop() (or any other function, for that matter), or if you just need a "counter" variable for a "for" loop that can be "thrown away" after you're done with it, you can declare variables inside of a function. An example of this is shown below for a program that reads an analog voltage value from pin A0 and prints it to the monitor:</p>
 <div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">inPin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="c1">//which analog pin will we read from?</span>
 <span class="c1">//this is global just so it isn't repetitively allocated each time.</span>
-<span class="kt">void</span><span class="w"> </span><span class="nf">setup</span><span class="p">(){</span>
-<span class="w">    </span><span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">115200</span><span class="p">);</span>
-<span class="p">}</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">setup</span><span class="p">(){</span><span class="w"></span>
+<span class="w">    </span><span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">115200</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
-<span class="kt">void</span><span class="w"> </span><span class="nf">loop</span><span class="p">(){</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">loop</span><span class="p">(){</span><span class="w"></span>
 <span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">myPotVal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">analogRead</span><span class="p">(</span><span class="n">inPin</span><span class="p">);</span><span class="c1">//local because we read a new value each time.</span>
 <span class="w">    </span><span class="c1">//note that it doesn't HAVE to be local... could have been global without much trouble.</span>
-<span class="w">    </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">myPotVal</span><span class="p">);</span>
-<span class="w">    </span><span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">();</span>
-<span class="p">}</span>
+<span class="w">    </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">myPotVal</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">();</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </pre></div>
 <p><em><strong>Pitfall warning! Overwriting Global Variables with Local Ones!</strong></em>
 One common error that new programmers make is declaring a variable at the top of a sketch (global), but then ALSO delcaring it inside void loop() by accident. When you do this, your program will default to the use of the local variable, <strong>not</strong> the global one. Here's an example of this mistake, in a simple program that is supposed to print the number "6" but instead prints the number "4:"</p>
-<div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">myNumber</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
-<span class="kt">void</span><span class="w"> </span><span class="nf">setup</span><span class="p">(){</span>
-<span class="w">    </span><span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">115200</span><span class="p">);</span>
-<span class="p">}</span>
-<span class="kt">void</span><span class="w"> </span><span class="nf">loop</span><span class="p">(){</span>
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">myNumber</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">myNumber</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
-<span class="w">    </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">result</span><span class="p">);</span>
-<span class="w">    </span><span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">();</span>
+<div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">myNumber</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">setup</span><span class="p">(){</span><span class="w"></span>
+<span class="w">    </span><span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">115200</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">loop</span><span class="p">(){</span><span class="w"></span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">myNumber</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">myNumber</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">result</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">();</span><span class="w"></span>
 </pre></div>
 <p>Remember that any local variable is only "visible" to the program from within the function or flow control statement (for/if/while) in which it was declared!</p>
 <p>There are some other variable scoping issues that may come up during the course, including the <a href="https://www.arduino.cc/reference/en/language/structure/further-syntax/define/">#DEFINE concept</a> but these are the big ones.</p>
@@ -13280,66 +13280,66 @@ One common error that new programmers make is declaring a variable at the top of
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Functions">Functions<a class="anchor-link" href="#Functions">¶</a></h3><p>Some of the programs you'll write in this course can get pretty complex. So, it might be a good idea to learn to write your own functions, which will clean up your void loop() considerably, allowing you to see at a glance what the program is doing. Arduino's official reference guide has a great resource for learning to write your own functions <a href="https://www.arduino.cc/en/Reference/FunctionDeclaration">here</a>.</p>
 <p>While the link above gives a great overview of functions, one thing that I'd like to mention is that for certain special tasks, it may be a good idea to write functions that don't <em>return</em> any value at all (and thus should be called void myFunctionName() since "void" is the anti-datatype), and just operate on global variables. This isn't a "good programming practice," but for what we'll be doing in this class, it can be very useful for cleaning up your code. Let's look at two examples of a program that has to print several values to the serial monitor at the end. The first does not use a function:</p>
-<div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">baseNum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
-<span class="kt">int</span><span class="w"> </span><span class="n">loopCount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<span class="kt">int</span><span class="w"> </span><span class="n">num1</span><span class="p">;</span>
-<span class="kt">int</span><span class="w"> </span><span class="n">num2</span><span class="p">;</span>
-<span class="kt">int</span><span class="w"> </span><span class="n">num3</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">baseNum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w"></span>
+<span class="kt">int</span><span class="w"> </span><span class="n">loopCount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="kt">int</span><span class="w"> </span><span class="n">num1</span><span class="p">;</span><span class="w"></span>
+<span class="kt">int</span><span class="w"> </span><span class="n">num2</span><span class="p">;</span><span class="w"></span>
+<span class="kt">int</span><span class="w"> </span><span class="n">num3</span><span class="p">;</span><span class="w"></span>
 
-<span class="kt">void</span><span class="w"> </span><span class="nf">setup</span><span class="p">(){</span>
-<span class="w">    </span><span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">115200</span><span class="p">);</span>
-<span class="p">}</span>
-<span class="kt">void</span><span class="w"> </span><span class="nf">loop</span><span class="p">(){</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">setup</span><span class="p">(){</span><span class="w"></span>
+<span class="w">    </span><span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">115200</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">loop</span><span class="p">(){</span><span class="w"></span>
 <span class="w">    </span><span class="c1">//calculate my three numbers</span>
-<span class="w">    </span><span class="n">num1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">baseNum</span><span class="o">*</span><span class="mi">1</span><span class="o">+</span><span class="n">loopCount</span><span class="p">;</span>
-<span class="w">    </span><span class="n">num2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">baseNum</span><span class="o">*</span><span class="mi">2</span><span class="o">+</span><span class="n">loopCount</span><span class="p">;</span>
-<span class="w">    </span><span class="n">num3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">baseNum</span><span class="o">*</span><span class="mi">3</span><span class="o">+</span><span class="n">loopCount</span><span class="p">;</span>
+<span class="w">    </span><span class="n">num1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">baseNum</span><span class="o">*</span><span class="mi">1</span><span class="o">+</span><span class="n">loopCount</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">num2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">baseNum</span><span class="o">*</span><span class="mi">2</span><span class="o">+</span><span class="n">loopCount</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">num3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">baseNum</span><span class="o">*</span><span class="mi">3</span><span class="o">+</span><span class="n">loopCount</span><span class="p">;</span><span class="w"></span>
 <span class="w">    </span><span class="c1">//print to the serial port for debugging</span>
-<span class="w">    </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">num1</span><span class="p">);</span>
+<span class="w">    </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">num1</span><span class="p">);</span><span class="w"></span>
 <span class="w">    </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">"</span><span class="se">\t</span><span class="s">"</span><span class="p">);</span><span class="c1">//prints a tab to space out the numbers</span>
-<span class="w">    </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">num2</span><span class="p">);</span>
+<span class="w">    </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">num2</span><span class="p">);</span><span class="w"></span>
 <span class="w">    </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">"</span><span class="se">\t</span><span class="s">"</span><span class="p">);</span><span class="c1">//prints a tab to space out the numbers</span>
-<span class="w">    </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">num3</span><span class="p">);</span>
+<span class="w">    </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">num3</span><span class="p">);</span><span class="w"></span>
 <span class="w">    </span><span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">();</span><span class="c1">//prints a newline to separate individual runs through "loop."</span>
 <span class="w">    </span><span class="c1">//increment the loop counter</span>
-<span class="w">    </span><span class="n">loopCount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">loopCount</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
-<span class="p">}</span>
+<span class="w">    </span><span class="n">loopCount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">loopCount</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </pre></div>
 <p>Notice that this program has a lot of repetitive code in it, and that it's not the easiest to read. It's a little "busy" (not really, but you can imagine that some programs will get <strong>very</strong> busy).</p>
 <p>Let's now look at a program that does the same thing, but with two user-defined functions. Each one performs a specific function, and is "called" inside void loop() to keep the main part of the program clean and easy to read.</p>
-<div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">baseNum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
-<span class="kt">int</span><span class="w"> </span><span class="n">loopCount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<span class="kt">int</span><span class="w"> </span><span class="n">num1</span><span class="p">;</span>
-<span class="kt">int</span><span class="w"> </span><span class="n">num2</span><span class="p">;</span>
-<span class="kt">int</span><span class="w"> </span><span class="n">num3</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">baseNum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w"></span>
+<span class="kt">int</span><span class="w"> </span><span class="n">loopCount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="kt">int</span><span class="w"> </span><span class="n">num1</span><span class="p">;</span><span class="w"></span>
+<span class="kt">int</span><span class="w"> </span><span class="n">num2</span><span class="p">;</span><span class="w"></span>
+<span class="kt">int</span><span class="w"> </span><span class="n">num3</span><span class="p">;</span><span class="w"></span>
 
-<span class="kt">void</span><span class="w"> </span><span class="nf">setup</span><span class="p">(){</span>
-<span class="w">    </span><span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">115200</span><span class="p">);</span>
-<span class="p">}</span>
-<span class="kt">void</span><span class="w"> </span><span class="nf">loop</span><span class="p">(){</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">setup</span><span class="p">(){</span><span class="w"></span>
+<span class="w">    </span><span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">115200</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">loop</span><span class="p">(){</span><span class="w"></span>
 <span class="w">    </span><span class="c1">//calculate my three numbers</span>
-<span class="w">    </span><span class="n">calcNumbers</span><span class="p">();</span>
+<span class="w">    </span><span class="n">calcNumbers</span><span class="p">();</span><span class="w"></span>
 <span class="w">    </span><span class="c1">//print to the serial port for debugging</span>
-<span class="w">    </span><span class="n">printData</span><span class="p">();</span>
+<span class="w">    </span><span class="n">printData</span><span class="p">();</span><span class="w"></span>
 <span class="w">    </span><span class="c1">//increment the loop counter</span>
-<span class="w">    </span><span class="n">loopCount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">loopCount</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
-<span class="p">}</span>
+<span class="w">    </span><span class="n">loopCount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">loopCount</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
-<span class="kt">void</span><span class="w"> </span><span class="nf">calcNumbers</span><span class="p">(){</span>
-<span class="w">    </span><span class="n">num1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">baseNum</span><span class="o">*</span><span class="mi">1</span><span class="o">+</span><span class="n">loopCount</span><span class="p">;</span>
-<span class="w">    </span><span class="n">num2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">baseNum</span><span class="o">*</span><span class="mi">2</span><span class="o">+</span><span class="n">loopCount</span><span class="p">;</span>
-<span class="w">    </span><span class="n">num3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">baseNum</span><span class="o">*</span><span class="mi">3</span><span class="o">+</span><span class="n">loopCount</span><span class="p">;</span>
-<span class="p">}</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">calcNumbers</span><span class="p">(){</span><span class="w"></span>
+<span class="w">    </span><span class="n">num1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">baseNum</span><span class="o">*</span><span class="mi">1</span><span class="o">+</span><span class="n">loopCount</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">num2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">baseNum</span><span class="o">*</span><span class="mi">2</span><span class="o">+</span><span class="n">loopCount</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">num3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">baseNum</span><span class="o">*</span><span class="mi">3</span><span class="o">+</span><span class="n">loopCount</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
-<span class="kt">void</span><span class="w"> </span><span class="nf">printData</span><span class="p">(){</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">printData</span><span class="p">(){</span><span class="w"></span>
 <span class="w">    </span><span class="c1">//print to the serial port for debugging</span>
-<span class="w">    </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">num1</span><span class="p">);</span>
+<span class="w">    </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">num1</span><span class="p">);</span><span class="w"></span>
 <span class="w">    </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">"</span><span class="se">\t</span><span class="s">"</span><span class="p">);</span><span class="c1">//prints a tab to space out the numbers</span>
-<span class="w">    </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">num2</span><span class="p">);</span>
+<span class="w">    </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">num2</span><span class="p">);</span><span class="w"></span>
 <span class="w">    </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">"</span><span class="se">\t</span><span class="s">"</span><span class="p">);</span><span class="c1">//prints a tab to space out the numbers</span>
-<span class="w">    </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">num3</span><span class="p">);</span>
+<span class="w">    </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">num3</span><span class="p">);</span><span class="w"></span>
 <span class="w">    </span><span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">();</span><span class="c1">//prints a newline to separate individual runs through "loop."</span>
-<span class="p">}</span>
+<span class="p">}</span><span class="w"></span>
 </pre></div>
 <p>Now notice that the void loop() function, where you'd start if you wanted to know what the program <strong>actually does</strong>, is only a couple of lines long, making it very easy to read. All of the functions operate on global variables, and none of them returns anything... but they do clean up the code. Doing this also makes it easy to debug your code, because you can debug one function at a time.</p>
 </div>
@@ -13384,8 +13384,8 @@ One common error that new programmers make is declaring a variable at the top of
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Typecasting">Typecasting<a class="anchor-link" href="#Typecasting">¶</a></h3><p>Typecasting is basically changing the datatype of a variable. This is very useful, because many functions in the Arduino language require that you pass them a certain datatype. The documentation page that explains typecasting for Arduino is <a href="https://www.arduino.cc/en/Reference/Cast">here</a>. For example, the <a href="https://www.arduino.cc/reference/en/language/functions/analog-io/analogwrite/">analogWrite()</a> function requires that you pass the analog value you'd like to write to a pin as an integer between 0 and 255. Let's say your code produced that number as a float. You could typecast that float before sending it to the analogWrite() command, as shown:</p>
-<div class="highlight"><pre><span></span><span class="kt">float</span><span class="w"> </span><span class="n">myVal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">analogRead</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">*</span><span class="mf">5.0</span><span class="o">/</span><span class="mf">1023.0</span><span class="o">*</span><span class="mf">255.0</span><span class="p">;</span>
-<span class="w">    </span><span class="n">analogWrite</span><span class="p">(</span><span class="mi">6</span><span class="p">,(</span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="mf">1.0</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><span class="kt">float</span><span class="w"> </span><span class="n">myVal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">analogRead</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">*</span><span class="mf">5.0</span><span class="o">/</span><span class="mf">1023.0</span><span class="o">*</span><span class="mf">255.0</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">analogWrite</span><span class="p">(</span><span class="mi">6</span><span class="p">,(</span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="mf">1.0</span><span class="p">);</span><span class="w"></span>
 </pre></div>
 <p>Notice that I also typecast the analogRead() command to make sure that the number I was working with in the calculation was a float, offering me the best possible precision in the calculation. In the end, the value I get is rounded, but that's OK.</p>
 </div>
@@ -13466,22 +13466,22 @@ One common error that new programmers make is declaring a variable at the top of
 <h4 id="Common-Bugs">Common Bugs<a class="anchor-link" href="#Common-Bugs">¶</a></h4><p>There are countless ways to make a mistake in programming, but there are a couple of common "traps" that are so prevalent that they're worth calling out specifically here:</p>
 <p><strong>You used the wrong datatype for a variable</strong></p>
 <p>This one happens a lot. Many functions in Arduino require a certain datatype to work properly, and if you're trying to do floating point math (math with decimal places), and you mix integers into your calculations, you could end up in trouble. For example, the two serial print lines below</p>
-<div class="highlight"><pre><span></span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span>
+<div class="highlight"><pre><span></span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="w"></span>
 
-<span class="o">**</span><span class="n">You</span><span class="w"> </span><span class="n">passed</span><span class="w"> </span><span class="n">an</span><span class="w"> </span><span class="n">argument</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">function</span><span class="w"> </span><span class="n">that</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">too</span><span class="w"> </span><span class="n">big</span><span class="p">,</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">wrong</span><span class="w"> </span><span class="n">sign</span><span class="p">,</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">wrong</span><span class="w"> </span><span class="n">datatype</span><span class="o">**</span>
+<span class="o">**</span><span class="n">You</span><span class="w"> </span><span class="n">passed</span><span class="w"> </span><span class="n">an</span><span class="w"> </span><span class="n">argument</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">function</span><span class="w"> </span><span class="n">that</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">too</span><span class="w"> </span><span class="n">big</span><span class="p">,</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">wrong</span><span class="w"> </span><span class="n">sign</span><span class="p">,</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">wrong</span><span class="w"> </span><span class="n">datatype</span><span class="o">**</span><span class="w"></span>
 
-<span class="o">**</span><span class="n">You</span><span class="w"> </span><span class="n">overwrote</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">variable</span><span class="o">**</span>
+<span class="o">**</span><span class="n">You</span><span class="w"> </span><span class="n">overwrote</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">variable</span><span class="o">**</span><span class="w"></span>
 
-<span class="n">This</span><span class="w"> </span><span class="n">happens</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">lot</span><span class="w"> </span><span class="n">when</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">accidentally</span><span class="w"> </span><span class="n">declare</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">variable</span><span class="w"> </span><span class="n">global</span><span class="p">,</span><span class="w"> </span><span class="n">but</span><span class="w"> </span><span class="n">then</span><span class="w"> </span><span class="n">re</span><span class="o">-</span><span class="n">declare</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">local</span><span class="w"> </span><span class="n">version</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="n">within</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">function</span><span class="p">.</span><span class="w"> </span><span class="n">An</span><span class="w"> </span><span class="n">example</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="k">this</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">shown</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="s">"variable scope"</span><span class="w"> </span><span class="n">section</span><span class="w"> </span><span class="n">above</span><span class="p">.</span><span class="w"> </span><span class="n">It</span><span class="err">'</span><span class="n">s</span><span class="w"> </span><span class="n">also</span><span class="w"> </span><span class="n">easy</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">overwrite</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">variable</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">miss</span><span class="w"> </span><span class="n">an</span><span class="w"> </span><span class="n">equals</span><span class="w"> </span><span class="n">sign</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">logical</span><span class="w"> </span><span class="n">statement</span><span class="p">.</span><span class="w"> </span><span class="n">here</span><span class="err">'</span><span class="n">s</span><span class="w"> </span><span class="n">an</span><span class="w"> </span><span class="n">example</span><span class="o">:</span>
+<span class="n">This</span><span class="w"> </span><span class="n">happens</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">lot</span><span class="w"> </span><span class="n">when</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">accidentally</span><span class="w"> </span><span class="n">declare</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">variable</span><span class="w"> </span><span class="n">global</span><span class="p">,</span><span class="w"> </span><span class="n">but</span><span class="w"> </span><span class="n">then</span><span class="w"> </span><span class="n">re</span><span class="o">-</span><span class="n">declare</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">local</span><span class="w"> </span><span class="n">version</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="n">within</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">function</span><span class="p">.</span><span class="w"> </span><span class="n">An</span><span class="w"> </span><span class="n">example</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="k">this</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">shown</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="s">"variable scope"</span><span class="w"> </span><span class="n">section</span><span class="w"> </span><span class="n">above</span><span class="p">.</span><span class="w"> </span><span class="n">It</span><span class="err">'</span><span class="n">s</span><span class="w"> </span><span class="n">also</span><span class="w"> </span><span class="n">easy</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">overwrite</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">variable</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">miss</span><span class="w"> </span><span class="n">an</span><span class="w"> </span><span class="n">equals</span><span class="w"> </span><span class="n">sign</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">logical</span><span class="w"> </span><span class="n">statement</span><span class="p">.</span><span class="w"> </span><span class="n">here</span><span class="err">'</span><span class="n">s</span><span class="w"> </span><span class="n">an</span><span class="w"> </span><span class="n">example</span><span class="o">:</span><span class="w"></span>
 
-<span class="err">```</span><span class="n">C</span><span class="o">++</span>
+<span class="err">```</span><span class="n">C</span><span class="o">++</span><span class="w"></span>
 <span class="c1">//let us know if a is one.</span>
-<span class="k">if</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">1</span><span class="p">){</span>
-<span class="w">    </span><span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">"a is one."</span><span class="p">);</span>
-<span class="p">}</span>
-<span class="k">else</span><span class="p">{</span>
-<span class="w">    </span><span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">"a is not one"</span><span class="p">);</span>
-<span class="p">}</span>
+<span class="k">if</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">1</span><span class="p">){</span><span class="w"></span>
+<span class="w">    </span><span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">"a is one."</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+<span class="k">else</span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">"a is not one"</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </pre></div>
 <p>No matter what you set "a" to earlier in your code, you will always see "a is one" on the serial monitor. Why? Because the code is missing an equals sign!! The line <code>a=1</code> assigns the value "1" to the variable "a." That's not what we wanted... we wanted to <strong>test</strong> if a was equal to one. If we assign the value 1 to a every loop, right before we print, and "1" is interpreted by Arduino as "true" (which it is), of course we're always going to see that a is one!!</p>
 <p>What we needed to write was:</p>
@@ -13503,7 +13503,7 @@ One common error that new programmers make is declaring a variable at the top of
 <li>Separate variables with a call to <code>Serial.print("\t");</code> to insert a tab in between variables</li>
 </ol>
 <p>Here is an example of a printData() function that has all of the right pieces:</p>
-<div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">printData</span><span class="p">(){</span>
+<div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">printData</span><span class="p">(){</span><span class="w"></span>
 <span class="w">    </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">t</span><span class="p">);</span><span class="c1">//print time</span>
 <span class="w">    </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">"</span><span class="se">\t</span><span class="s">"</span><span class="p">);</span><span class="c1">//separate with a tab</span>
 <span class="w">    </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">var1</span><span class="p">);</span><span class="c1">//print first variable of interest</span>
@@ -13511,8 +13511,8 @@ One common error that new programmers make is declaring a variable at the top of
 <span class="w">    </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">var2</span><span class="p">);</span><span class="c1">//print second variable of interest</span>
 <span class="w">    </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">"</span><span class="se">\t</span><span class="s">"</span><span class="p">);</span><span class="c1">//separate with a tab</span>
 <span class="w">    </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">var3</span><span class="p">);</span><span class="c1">//print third variable of interest</span>
-<span class="w">    </span><span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">();</span>
-<span class="p">}</span>
+<span class="w">    </span><span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">();</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </pre></div>
 <p>This function prints three numbers separated by tabs, but you can print more! Just remember that lots of printing will slow down you overall "loop time," or the time it takes the Arduino to complete one pass through void loop(). Since most of the control systems we'll be implementing in Arduino will be designed assuming that the Arduino operates infinitely fast (continuous-time math), we want to keep the loop time as small as possible. If you keep track of a "dt" or loop time in your code, you can always check this! Loop times of around 100 Hz are good.</p>
 </div>
@@ -13533,32 +13533,32 @@ One common error that new programmers make is declaring a variable at the top of
 <span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">dtMicros</span><span class="p">;</span><span class="c1">//loop time in microseconds</span>
 <span class="kt">float</span><span class="w"> </span><span class="n">dt</span><span class="p">;</span><span class="c1">//loop time in seconds, suitable for calculating derivatives.</span>
 
-<span class="kt">void</span><span class="w"> </span><span class="nf">setup</span><span class="p">(){</span>
-<span class="w">    </span><span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">115200</span><span class="p">);</span>
-<span class="w">    </span><span class="n">microsLast</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">micros</span><span class="p">();</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">setup</span><span class="p">(){</span><span class="w"></span>
+<span class="w">    </span><span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">115200</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">microsLast</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">micros</span><span class="p">();</span><span class="w"></span>
 <span class="w">    </span><span class="n">delay</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span><span class="c1">//delay for one millisecond</span>
 <span class="w">    </span><span class="n">microsNow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">micros</span><span class="p">();</span><span class="c1">//initialize both of these. BE CAREFUL that you never get a dT of 0!!!</span>
-<span class="p">}</span>
+<span class="p">}</span><span class="w"></span>
 
-<span class="kt">void</span><span class="w"> </span><span class="nf">loop</span><span class="p">(){</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">loop</span><span class="p">(){</span><span class="w"></span>
 <span class="w">    </span><span class="c1">//check the time</span>
-<span class="w">    </span><span class="n">microsNow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">micros</span><span class="p">();</span>
+<span class="w">    </span><span class="n">microsNow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">micros</span><span class="p">();</span><span class="w"></span>
 <span class="w">    </span><span class="c1">//compare to old time;</span>
-<span class="w">    </span><span class="n">dtMicros</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">microsNow</span><span class="o">-</span><span class="n">microsLast</span><span class="p">;</span>
+<span class="w">    </span><span class="n">dtMicros</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">microsNow</span><span class="o">-</span><span class="n">microsLast</span><span class="p">;</span><span class="w"></span>
 <span class="w">    </span><span class="c1">//convert to seconds</span>
-<span class="w">    </span><span class="n">dt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">dtMicros</span><span class="o">/</span><span class="mf">1000000000.0</span><span class="p">;</span>
+<span class="w">    </span><span class="n">dt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">dtMicros</span><span class="o">/</span><span class="mf">1000000000.0</span><span class="p">;</span><span class="w"></span>
 <span class="w">    </span><span class="c1">//store "old time" right now before doing anything else! But make sure we don't need "microsNow" anywhere else</span>
-<span class="w">    </span><span class="n">microsLast</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">micros</span><span class="p">;</span>
+<span class="w">    </span><span class="n">microsLast</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">micros</span><span class="p">;</span><span class="w"></span>
 <span class="w">    </span><span class="c1">//do something useful. read a value from A0 I guess</span>
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">someVal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">analogRead</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">someVal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">analogRead</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span><span class="w"></span>
 <span class="w">    </span><span class="c1">//print micros, dt, and value</span>
-<span class="w">    </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">microsNow</span><span class="p">);</span>
-<span class="w">    </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">"</span><span class="se">\t</span><span class="s">"</span><span class="p">);</span>
-<span class="w">    </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">dt</span><span class="p">);</span>
-<span class="w">    </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">"</span><span class="se">\t</span><span class="s">"</span><span class="p">);</span>
-<span class="w">    </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">someVal</span><span class="p">);</span>
-<span class="w">    </span><span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">();</span>
-<span class="p">}</span>
+<span class="w">    </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">microsNow</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">"</span><span class="se">\t</span><span class="s">"</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">dt</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">"</span><span class="se">\t</span><span class="s">"</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">someVal</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">();</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
 </div>

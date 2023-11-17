@@ -13152,95 +13152,95 @@ $( document ).ready(function(){
 <p>However, the Romi robots in ES302 are also equipped with the robot arm kit, which you can read about <a href="https://www.pololu.com/docs/0J76">here</a>, and a custom-made proximity sensor. You can read about proximity sensors in our open-source textbook in section 7.5.1.</p>
 <p>These 'extras' mean that working with our Romis in Arduino is slightly different than any of the examples that come with the Romi library, so a code is provided below to illustrate the functionality of the ES302 Romis.</p>
 <p>Note that the code uses a library called "Servo3," which I have written for the Romi to avoid conflicting with the operation of its wheel motors. You can download that library <a href="https://github.com/Alexanderallenbrown/Servo3">here</a> and if you need help with Arduino or with installing libraries, you should consult the <a href="../01_Background_Resources/01D_Arduino_resource.html">Arduino Resource</a> notebook.</p>
-<div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;Servo3.h&gt;</span><span class="c1"> //if you don't have this, download it!</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;Romi32U4.h&gt;</span>
+<div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;Servo3.h&gt;</span><span class="c1"> //if you don't have this, download it!</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;Romi32U4.h&gt;</span><span class="cp"></span>
 
-<span class="n">Romi32U4Encoders</span><span class="w"> </span><span class="n">encoders</span><span class="p">;</span>
-<span class="n">Romi32U4Motors</span><span class="w"> </span><span class="n">motors</span><span class="p">;</span>
+<span class="n">Romi32U4Encoders</span><span class="w"> </span><span class="n">encoders</span><span class="p">;</span><span class="w"></span>
+<span class="n">Romi32U4Motors</span><span class="w"> </span><span class="n">motors</span><span class="p">;</span><span class="w"></span>
 <span class="c1">//servo object</span>
-<span class="n">Servo3</span><span class="w"> </span><span class="n">m1</span><span class="p">;</span>
-<span class="n">Servo3</span><span class="w"> </span><span class="n">m2</span><span class="p">;</span>
-<span class="n">Servo3</span><span class="w"> </span><span class="n">m3</span><span class="p">;</span>
+<span class="n">Servo3</span><span class="w"> </span><span class="n">m1</span><span class="p">;</span><span class="w"></span>
+<span class="n">Servo3</span><span class="w"> </span><span class="n">m2</span><span class="p">;</span><span class="w"></span>
+<span class="n">Servo3</span><span class="w"> </span><span class="n">m3</span><span class="p">;</span><span class="w"></span>
 
-<span class="kt">int16_t</span><span class="w"> </span><span class="n">countsLeft</span><span class="p">;</span>
-<span class="kt">int16_t</span><span class="w"> </span><span class="n">countsRight</span><span class="p">;</span>
-<span class="kt">int16_t</span><span class="w"> </span><span class="n">leftCommand</span><span class="p">;</span>
-<span class="kt">int16_t</span><span class="w"> </span><span class="n">rightCommand</span><span class="p">;</span>
-<span class="kt">int16_t</span><span class="w"> </span><span class="n">m1Command</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">90</span><span class="p">;</span>
-<span class="kt">int16_t</span><span class="w"> </span><span class="n">m2Command</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">90</span><span class="p">;</span>
-<span class="kt">int16_t</span><span class="w"> </span><span class="n">m3Command</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">90</span><span class="p">;</span>
-<span class="kt">int16_t</span><span class="w"> </span><span class="n">proxVal</span><span class="p">;</span>
-<span class="kt">int16_t</span><span class="w"> </span><span class="n">m1fb</span><span class="p">;</span>
-<span class="kt">int16_t</span><span class="w"> </span><span class="n">m2fb</span><span class="p">;</span>
-<span class="kt">int16_t</span><span class="w"> </span><span class="n">m3fb</span><span class="p">;</span>
+<span class="kt">int16_t</span><span class="w"> </span><span class="n">countsLeft</span><span class="p">;</span><span class="w"></span>
+<span class="kt">int16_t</span><span class="w"> </span><span class="n">countsRight</span><span class="p">;</span><span class="w"></span>
+<span class="kt">int16_t</span><span class="w"> </span><span class="n">leftCommand</span><span class="p">;</span><span class="w"></span>
+<span class="kt">int16_t</span><span class="w"> </span><span class="n">rightCommand</span><span class="p">;</span><span class="w"></span>
+<span class="kt">int16_t</span><span class="w"> </span><span class="n">m1Command</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">90</span><span class="p">;</span><span class="w"></span>
+<span class="kt">int16_t</span><span class="w"> </span><span class="n">m2Command</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">90</span><span class="p">;</span><span class="w"></span>
+<span class="kt">int16_t</span><span class="w"> </span><span class="n">m3Command</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">90</span><span class="p">;</span><span class="w"></span>
+<span class="kt">int16_t</span><span class="w"> </span><span class="n">proxVal</span><span class="p">;</span><span class="w"></span>
+<span class="kt">int16_t</span><span class="w"> </span><span class="n">m1fb</span><span class="p">;</span><span class="w"></span>
+<span class="kt">int16_t</span><span class="w"> </span><span class="n">m2fb</span><span class="p">;</span><span class="w"></span>
+<span class="kt">int16_t</span><span class="w"> </span><span class="n">m3fb</span><span class="p">;</span><span class="w"></span>
 
-<span class="kt">void</span><span class="w"> </span><span class="nf">setup</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">setup</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">  </span><span class="c1">// attach servos on requisite pins</span>
 <span class="w">  </span><span class="c1">//servo 1 (tilt) is attached to pin 5</span>
-<span class="w">  </span><span class="n">m1</span><span class="p">.</span><span class="n">attach</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+<span class="w">  </span><span class="n">m1</span><span class="p">.</span><span class="n">attach</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span><span class="w"></span>
 <span class="w">  </span><span class="c1">//servo 2 (gripper) is attached to pin 12</span>
-<span class="w">  </span><span class="n">m2</span><span class="p">.</span><span class="n">attach</span><span class="p">(</span><span class="mi">12</span><span class="p">);</span>
+<span class="w">  </span><span class="n">m2</span><span class="p">.</span><span class="n">attach</span><span class="p">(</span><span class="mi">12</span><span class="p">);</span><span class="w"></span>
 <span class="w">  </span><span class="c1">//servo 3 (main arm) is attached to pin 22</span>
-<span class="w">  </span><span class="n">m3</span><span class="p">.</span><span class="n">attach</span><span class="p">(</span><span class="mi">22</span><span class="p">);</span>
+<span class="w">  </span><span class="n">m3</span><span class="p">.</span><span class="n">attach</span><span class="p">(</span><span class="mi">22</span><span class="p">);</span><span class="w"></span>
 <span class="w">  </span><span class="c1">//IR emitter is attached to pin 13</span>
-<span class="w">  </span><span class="n">pinMode</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span><span class="w"> </span><span class="n">OUTPUT</span><span class="p">);</span>
+<span class="w">  </span><span class="n">pinMode</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span><span class="w"> </span><span class="n">OUTPUT</span><span class="p">);</span><span class="w"></span>
 <span class="w">  </span><span class="c1">//turn on the LED so we can use the prox sensor</span>
-<span class="w">  </span><span class="n">digitalWrite</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span><span class="w"> </span><span class="n">HIGH</span><span class="p">);</span>
+<span class="w">  </span><span class="n">digitalWrite</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span><span class="w"> </span><span class="n">HIGH</span><span class="p">);</span><span class="w"></span>
 
 <span class="w">  </span><span class="c1">//begin Serial communication</span>
-<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">115200</span><span class="p">);</span>
-<span class="p">}</span>
+<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">115200</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
-<span class="kt">void</span><span class="w"> </span><span class="nf">loop</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">loop</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">  </span><span class="c1">// read sensors on Romi</span>
-<span class="w">  </span><span class="n">countsLeft</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">encoders</span><span class="p">.</span><span class="n">getCountsLeft</span><span class="p">();</span>
-<span class="w">  </span><span class="n">countsRight</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">encoders</span><span class="p">.</span><span class="n">getCountsRight</span><span class="p">();</span>
-<span class="w">  </span><span class="n">proxVal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">analogRead</span><span class="p">(</span><span class="mi">6</span><span class="p">);</span>
-<span class="w">  </span><span class="n">m1fb</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">analogRead</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
-<span class="w">  </span><span class="n">m2fb</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">analogRead</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
-<span class="w">  </span><span class="n">m3fb</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">analogRead</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="w">  </span><span class="n">countsLeft</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">encoders</span><span class="p">.</span><span class="n">getCountsLeft</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="n">countsRight</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">encoders</span><span class="p">.</span><span class="n">getCountsRight</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="n">proxVal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">analogRead</span><span class="p">(</span><span class="mi">6</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">m1fb</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">analogRead</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">m2fb</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">analogRead</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">m3fb</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">analogRead</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span><span class="w"></span>
 
 <span class="w">  </span><span class="c1">//get current time in seconds</span>
-<span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="n">curtime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">millis</span><span class="p">()</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">1000.0</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="n">curtime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">millis</span><span class="p">()</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">1000.0</span><span class="p">;</span><span class="w"></span>
 <span class="w">  </span><span class="c1">//now create a command for each of the motors/servos</span>
-<span class="w">  </span><span class="n">leftCommand</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">75</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">sin</span><span class="p">(</span><span class="n">curtime</span><span class="p">);</span>
-<span class="w">  </span><span class="n">rightCommand</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">75</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">sin</span><span class="p">(</span><span class="n">curtime</span><span class="p">);</span>
-<span class="w">  </span><span class="n">m1Command</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">sin</span><span class="p">(</span><span class="n">curtime</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">90</span><span class="p">;</span>
-<span class="w">  </span><span class="n">m2Command</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">90</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">90</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">sin</span><span class="p">(</span><span class="n">curtime</span><span class="p">);</span>
-<span class="w">  </span><span class="n">m3Command</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">20</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">sin</span><span class="p">(</span><span class="n">curtime</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">90</span><span class="p">;</span>
+<span class="w">  </span><span class="n">leftCommand</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">75</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">sin</span><span class="p">(</span><span class="n">curtime</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">rightCommand</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">75</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">sin</span><span class="p">(</span><span class="n">curtime</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">m1Command</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">sin</span><span class="p">(</span><span class="n">curtime</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">90</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="n">m2Command</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">90</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">90</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">sin</span><span class="p">(</span><span class="n">curtime</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">m3Command</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">20</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">sin</span><span class="p">(</span><span class="n">curtime</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">90</span><span class="p">;</span><span class="w"></span>
 
 <span class="w">  </span><span class="c1">//now send commands to the motors/servos</span>
-<span class="w">  </span><span class="n">motors</span><span class="p">.</span><span class="n">setLeftSpeed</span><span class="p">(</span><span class="n">leftCommand</span><span class="p">);</span>
-<span class="w">  </span><span class="n">motors</span><span class="p">.</span><span class="n">setRightSpeed</span><span class="p">(</span><span class="n">rightCommand</span><span class="p">);</span>
-<span class="w">  </span><span class="n">m1</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="n">m1Command</span><span class="p">);</span>
-<span class="w">  </span><span class="n">m2</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="n">m2Command</span><span class="p">);</span>
-<span class="w">  </span><span class="n">m3</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="n">m3Command</span><span class="p">);</span>
+<span class="w">  </span><span class="n">motors</span><span class="p">.</span><span class="n">setLeftSpeed</span><span class="p">(</span><span class="n">leftCommand</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">motors</span><span class="p">.</span><span class="n">setRightSpeed</span><span class="p">(</span><span class="n">rightCommand</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">m1</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="n">m1Command</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">m2</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="n">m2Command</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">m3</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="n">m3Command</span><span class="p">);</span><span class="w"></span>
 
 <span class="w">  </span><span class="c1">//now send feedback to the serial monitor for us to see</span>
-<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">leftCommand</span><span class="p">);</span>
-<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">","</span><span class="p">);</span>
-<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">rightCommand</span><span class="p">);</span>
-<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">","</span><span class="p">);</span>
-<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">m1Command</span><span class="p">);</span>
-<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">","</span><span class="p">);</span>
-<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">m2Command</span><span class="p">);</span>
-<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">","</span><span class="p">);</span>
-<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">m3Command</span><span class="p">);</span>
-<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">","</span><span class="p">);</span>
-<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">countsLeft</span><span class="p">);</span>
-<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">","</span><span class="p">);</span>
-<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">countsRight</span><span class="p">);</span>
-<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">","</span><span class="p">);</span>
-<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">m1fb</span><span class="p">);</span>
-<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">","</span><span class="p">);</span>
-<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">m2fb</span><span class="p">);</span>
-<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">","</span><span class="p">);</span>
-<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">m3fb</span><span class="p">);</span>
-<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">","</span><span class="p">);</span>
-<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">proxVal</span><span class="p">);</span>
-<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">();</span>
+<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">leftCommand</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">","</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">rightCommand</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">","</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">m1Command</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">","</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">m2Command</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">","</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">m3Command</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">","</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">countsLeft</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">","</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">countsRight</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">","</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">m1fb</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">","</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">m2fb</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">","</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">m3fb</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">","</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">proxVal</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">();</span><span class="w"></span>
 
-<span class="p">}</span>
+<span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
 </div>
